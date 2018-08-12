@@ -54,4 +54,7 @@ set si "Smart indent
 set wrap "Wrap lines
  
  
- 
+ "---
+ " PHP
+ "---
+ autocmd FileType php set omnifunc=phpcomplete#CompletePHP

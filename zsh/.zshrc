@@ -68,6 +68,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -98,7 +99,6 @@ source $ZSH/oh-my-zsh.sh
 showPort() {
         lsof -i tcp:$1
 }
-
 alias port=showPort
 # git-related aliases
 alias recent='for k in `git branch | perl -pe s/^..//`; do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k -- | head -n 1`\\t$k; done | sort -r | head'
