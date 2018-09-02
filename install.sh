@@ -1,12 +1,7 @@
 #!/bin/sh
-apt install terminator
 apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-mv  $PWD/vim/.vimrc ~/.vimrc_bak
-mv  $PWD/zsh/.zshrc ~/.zshrc_bak
-mv  $PWD/tmux/.tmux.conf ~/.tmux.conf_bak
-
+sudo apt-get install fonts-powerline #fonts for omzsh agnoster theme
 ln -s  $PWD/vim/.vimrc ~/.vimrc
 ln -s  $PWD/zsh/.zshrc ~/.zshrc
 ln -s  $PWD/tmux/.tmux.conf ~/.tmux.conf
