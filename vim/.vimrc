@@ -1,6 +1,6 @@
 " plugin manager
 " call pathogen#infect()
-execute pathogen#infect()
+" execute pathogen#infect()
 
 "automatically reload .vimrc
 autocmd! bufwritepost .vimrc source %

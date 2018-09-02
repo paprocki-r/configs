@@ -21,7 +21,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 #i3wm-gaps installation 
 sh i3gapsinstall/install.sh
-
+sudo apt-get install dmenu
 #i3wm-gaps config
 mv ~/.config/i3/config ~/.config/i3/config_bak
 ln -s $PWD/i3-gaps-conf/config ~/.config/i3/config 
