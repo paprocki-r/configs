@@ -23,3 +23,12 @@ chsh -s $(zsh)
 
 #TMUX PLUGIN MANAGER installation
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+#i3wm-gaps installation 
+sh i3gapsinstall/install.sh
+
+#i3wm-gaps config
+mv ~/.config/i3/config ~/.config/i3/config_bak
+ln -s $PWD/i3-gaps-conf/config ~/.config/i3/config 
+#for transparency
+ln -s $PWD/i3gapsinstall/.compton.conf ~/.compton.conf

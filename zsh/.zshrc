@@ -62,6 +62,7 @@ ZSH_THEME="agnoster"
 plugins=(
   git
   tmux
+  extract
 )
 
 source $ZSH/oh-my-zsh.sh
