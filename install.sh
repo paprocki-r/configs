@@ -1,4 +1,11 @@
 #!/bin/sh
+
+apt install htop
+apt install git
+apt install lm-sensors
+apt install redshift-gtk
+
+#
 apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sudo apt-get install fonts-powerline #fonts for omzsh agnoster theme
