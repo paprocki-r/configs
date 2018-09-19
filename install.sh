@@ -12,6 +12,7 @@ sudo apt-get install fonts-powerline #fonts for omzsh agnoster theme
 ln -s  $PWD/vim/.vimrc ~/.vimrc
 ln -s  $PWD/zsh/.zshrc ~/.zshrc
 ln -s  $PWD/tmux/.tmux.conf ~/.tmux.conf
+ln -s  $PWD/vim/.aliases ~/.aliases
 
 #set up terminator as default terminal
 gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
