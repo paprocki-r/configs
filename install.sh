@@ -1,4 +1,4 @@
-bin/sh
+#!bin/sh
 
 apt install htop
 apt install git
@@ -13,7 +13,7 @@ sudo apt-get install fonts-powerline #fonts for omzsh agnoster theme
 ln -s  $PWD/vim/.vimrc ~/.vimrc
 ln -s  $PWD/zsh/.zshrc ~/.zshrc
 ln -s  $PWD/tmux/.tmux.conf ~/.tmux.conf
-ln -s  $PWD/vim/.aliases ~/.aliases
+ln -s  $PWD/zsh/.aliases ~/.aliases
 
 #set up terminator as default terminal
 gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
@@ -31,8 +31,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
 apt install python-pip
+apt install python3-dev python3-pip
 #thefuck
-pip install thefuck
+pip3 install thefuck
 
 #i3wm-gaps installation 
 sh i3gapsinstall/install.sh

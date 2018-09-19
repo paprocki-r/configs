@@ -63,7 +63,7 @@ plugins=(
   git
   tmux
   extract
-  thefuck
+#  thefuck
 )
 
 source $ZSH/oh-my-zsh.sh
