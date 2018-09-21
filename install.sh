@@ -44,7 +44,7 @@ sudo apt-get install dmenu
 mv ~/.config/i3/config ~/.config/i3/config_bak
 ln -s $PWD/i3-gaps-conf/config ~/.config/i3/config 
 #for transparency
-ln -s $PWD/i3gapsinstall/.compton.conf ~/.compton.conf
+ln -s $PWD/i3-gaps-conf/.compton.conf ~/.compton.conf
 
 ### extra software
 mkdir software
