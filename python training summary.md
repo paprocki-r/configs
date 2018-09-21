@@ -203,7 +203,245 @@ python -O #optimization; all asserts are turned off
 `break and continue have to be inside of while loop`
 
 
-- global
-- nonlocal 
+- global - wchodzi od razu do najwyzszego scope modulowego
+- nonlocal - wchodzi w coraz wyzsze scopy - ale nie dochodzi do globala
 
 #VII. Compound statement
+*** scope: modulu, klasy, funkcji ***
+
+1. If X: elif X: else:
+2.  A is B # are names refering to the same instance 
+	A == B # evaluates left and right and checks if they're equal
+	None == False #false, beause None is not bool
+	not None==True: #true, the "not" forces None to be casted to bool and then compares 
+3. Controol flows off the end (kontrola dochodzi do konca bloku) except:
+	1) an exceptio
+	2) return
+	3) continue (only in for-while)
+	4) break (only in for-while)
+4. for target_list in expression_list:suite
+	else: suite
+
+	target_list = list of tuples
+	expression_list - iterable
+	else: it will be executed if for will finish successfully
+
+5. while expr: suite
+	else # if while was success, then execute 
+	```while False:
+		print("A")
+	else:
+		print("B") #B 
+```
+
+```
+	while True:
+		break
+	else:
+		print("A") #empty
+```
+
+6. try: suite 
+	except expr as identifier: suite #if error
+	else: suite #execute if try block is done successfully(no continue or break)
+	finally: suite #it will always execute
+
+	try:suite
+	finally: suite
+```
+	try: 1/0
+	except(ZeroDivisionError, OverflowError) as error:
+		print(type(error))
+```
+
+	[try]+(except)+(else)+[except/finally] #()optional []mandatory
+
+	
+	in finally - DO NO use return, break or continue!!!
+		- if we have break, return or continue, then exception will be neglected
+``` 
+while True:
+	try:
+		raise ValueError()
+	finally:
+		break #nothing will be printed; change break to pass to print the error
+```
+
+7. function definition
+	def name(par_list)->expr:
+		suite
+
+```
+#args - lista parametrow pozycyjnych
+## kwargs - slownik argumentow, ktore nie maja explicite nazwy (czyli poza arg1 i arg2)
+	def function(arg1. arg2=2, *args, **kwargs):
+		pass
+```
+	*** nie ma przeciazenia funkcji (bo nie ma typow) ***
+```
+	def do(ord, *args, **kwargs):
+		pass
+	do() # error		
+	do(1) #ord = 1
+	do(ord=1) #ord = 1
+	do(1,2,3) #ord = 1; args=(2,3)
+	do(ord=1, extra=2) #ord=1, kwargs{'extra':2}
+	do(1,2,3,ord=3,extra=4) #error - bo przypisujemy 2 razy do tego samego parametru
+	do(1,2,3, extra=4) #ord=1, args=(2,3), kwargs{"extra":4}
+	do(1, **{abc:1}) #rozpakowanie slownika do parametru
+	do(1, abc=1) # to samo co powyzej
+	do(*(1,2,3,4)) #rozpakowanie tupli; ord=1, args=(2,3,4)
+	do(1,(2,3), extra=4, abc=5) #org=1, args=((2,3),), kwargs{"extra":4, "abc"=5})
+```
+
+*** Funkcja jest obiektem - moze miec atrybuty!!! ***
+` do.foo = True `
+
+8. Generators (are iterable) - type of function (i.e. range)
+
+```
+
+#generator fib
+
+def fib(n):
+	a,b=0,1
+	for i in range(n):
+		yield a
+		a,b = b,a+b
+
+for f in fib(20):
+	print(f)
+
+###
+#2 generators together
+def combo(n):
+    yield from range(n)
+    yield from range(n, -1, -1)
+
+for n in combo(4):
+    print(n)    
+```
+
+*** wywolanie generatora zatrzymuje sie na instrukcji yield ***
+
+```
+#generators also have:
+next(generator)
+generator.send(2)
+generator.throw(RuntimeError, "test")
+generator.close()
+```
+
+9. Decorators
+- you can decorate function or class
+- it changes nothing in the semantic - it's just syntax sugar (just makes code look better)
+*** @dec_name(arg_list) *** 
+```
+@decoratorA
+def function(*args):pass
+#it's equivalent to
+def function(*args):pass
+function = decoratorA(function)
+```
+
+
+```
+def abc(f):
+    f.some_name = 'some_name'
+    return f
+
+@abc
+def test():
+    print("Inside test")
+
+print(test.some_name)
+```
+
+```
+#function decorator fd
+#decorator - measure function time
+def fd(wrapped):
+    def wrapper(*args, **kwargs):
+        t = time()
+        try:
+            return wrapped(*args, **kwargs)
+        finally:
+            print(wrapped.__name__, time()-t)
+    return wrapper
+
+
+from time import time, sleep
+@fd
+def test(): sleep(1.5)
+
+test()
+```
+
+
+```
+#passing param to decorator = decorator around decorator; or rather making customized decorator
+
+from time import time
+def timeit(callback):
+    def fd(wrapped):
+        def wrapper(*args, **kwargs):
+            t = time()
+            try:
+                return wrapped(*args, **kwargs)
+            finally:
+                callback(wrapped, time() - t)
+        return wrapper
+    return fd
+
+@timeit(lambda f, t:print("{}:{:.10f}".format(f.__name__,t)))
+def test_function()->None:
+    print("inside test function")
+#kazde wywolanie tworzy domkniecie dla zadanych parametrow
+test_function()
+```
+10.With statement  - allows for context (inside if with something is done, outside context is back)
+```
+with open('spam.txt', 'w') as f
+	f.write('spam') #f.exit() calls f.close() so it closes file automatically with exiting from "with"
+```
+
+
+# this will supress the error if file is not found-this is proper way of doing it, there is no need for try statementc
+```import os
+with supress(FileNotFoundError):
+	os.remove('file.tmp')
+```
+
+#VIII.OOB
+klasa, modul, cialo deklaraacji klas
+```
+class Foo:pass = class Foo(object):pass
+
+@some_decorator(arg)
+class Foo:pass
+
+class Foo(Base1, Base2):
+	def method(self,, *args))
+	@staticmethod
+	def static_method(*args):pass
+
+	@classmethod
+	def class_method(cls, *args):pass #cls - obiekt klasy na rzecz ktorej metoda jest wywolywana;
+	#sluzy do wywolywania metody klasy bazowej lub klasy pochodnej
+```
+
+1. konstruktor sluzy nie do konstruowania obiektow, a do konstruowania KLAS - dynamicznego typowania. W Pythonie malo sie ich uzywa. Raczej inicjalizatory __init__
+
+2. all class members (data and methods) are public
+3. all member functions are virtual
+4. classes themselves are objects
+5. no abstract classes,
+6. binded method - method inside of class
+	unbinded method - static and global methods
+	if we want to bind function to instance we need to use moduletypes
+
+## Dziedziczenie (Inheritance) - based on algorithm "Resolution order - C3 linearization"
+
+# IX. Extras
+1. Coroutines (for async programming)
+2. Aspect oriented programming
