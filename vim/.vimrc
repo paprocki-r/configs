@@ -74,3 +74,4 @@ set nowritebackup
 set noswapfile
 
 "python-mode
+:map <F2> :w\|!python %<CR>
