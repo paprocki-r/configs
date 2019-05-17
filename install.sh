@@ -27,3 +27,10 @@ mv ~/.config/i3/config ~/.config/i3/config_bak
 ln -s $PWD/i3-gaps-conf/config ~/.config/i3/config 
 #for transparency
 ln -s $PWD/i3gapsinstall/.compton.conf ~/.compton.conf
+
+#aliases
+ln -s $PWD/aliases ~/.aliases
+
+#LINKS
+sudo ln -s ~/pycharm/bin/pycharm.sh pycharm
+chmod +x ~/pycharm/bin/pycharm.sh
