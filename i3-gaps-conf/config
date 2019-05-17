@@ -163,6 +163,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
+
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -207,6 +208,9 @@ bindsym XF86MonBrightnessUp exec brightlight -i 40 # decrease screen brightness
 exec --no-startup-id redshift-gtk
 #NetworkManager applet
 exec --no-startup-id nm-applet
+#2 screens home setup - monitor on the left of the notebook
+exec --no-startup-id xrandr --output HDMI-1-1 --auto --left-of eDP-1-1
+
 
 # window colours: border background text
 client.focused        #0F0F0F #7FB256 #F5F5FF
@@ -216,7 +220,7 @@ client.urgent #0F0F0F #BC9B54 #E5E5E5
 
 # Press $mod+o followed by either f, t, Escape or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
-set $mode_launcher Launch: [f]irefox [t]hunderbird [s]ubl [p]ycharm
+set $mode_launcher Launch: [f]irefox [t]hunderbird [s]ubl [p]ycharm [Shift+s] shutdown [Shift+r] reboot
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
@@ -225,6 +229,8 @@ mode "$mode_launcher" {
     bindsym s exec subl
     bindsym p exec pycharm
 
+ 	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+r exec --no-startup-id systemctl reboot, mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
