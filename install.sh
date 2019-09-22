@@ -1,10 +1,10 @@
-#!bin/sh
+#!/bin/bash
 
 apt install htop
 apt install git
 apt install lm-sensors
 apt install redshift-gtk
-apt intall terminator
+apt install terminator
 #
 apt install zsh
 apt install curl
