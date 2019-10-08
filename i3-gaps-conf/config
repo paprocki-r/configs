@@ -208,8 +208,10 @@ bindsym XF86MonBrightnessUp exec brightlight -i 40 # decrease screen brightness
 exec --no-startup-id redshift-gtk
 #NetworkManager applet
 exec --no-startup-id nm-applet
+#Printer applet
+exec --no-startup-id system-config-printer-applet
 #2 screens home setup - monitor on the left of the notebook
-exec --no-startup-id xrandr --output HDMI-1-1 --auto --left-of eDP-1-1
+exec --no-startup-id xrandr --output HDMI-1-1 --auto --right-of eDP-1-1
 
 
 # window colours: border background text
@@ -236,3 +238,5 @@ mode "$mode_launcher" {
     bindsym Return mode "default"
 }
 
+# for printscreen
+bindsym $mod+Print exec gnome-screenshot -a

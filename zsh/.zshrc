@@ -63,7 +63,7 @@ plugins=(
   git
   tmux
   extract
-#  thefuck
+  thefuck
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -104,3 +104,5 @@ if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.z
 fi
 
 eval $(thefuck --alias)
+
+
