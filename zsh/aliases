@@ -1,1 +1,1 @@
-rtest = '~/pycharm/bin/pycharm.sh'
+alias cookiecuttervenv='source /home/rav2/workspace/python/virtualenvs/cookiecuttervenv/bin/activate'
